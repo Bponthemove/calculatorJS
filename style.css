@@ -1,0 +1,59 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.wrapper{
+    margin: 2em auto;
+    width: 506px;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.75);
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 2em;
+    height: 6em;
+}
+
+.output{
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input{
+    font-size: 1.8em;
+    color: white;
+}
+
+.btn-wrapper{
+    margin-top: 2px;
+    display: grid;
+    gap: 2px;
+    grid-template-rows: repeat(5, 125px);
+    grid-template-columns: repeat(4, 125px);
+}
+
+.btn{
+    font-size: 1.8em;
+    cursor: pointer;
+    background-color: rgba(31, 143, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover{
+    background-color: rgba(31, 143, 255, 0.2);
+}
+
+.equals, .ac{
+    grid-column: span 2;
+}
