@@ -1,6 +1,7 @@
 class Calculator {
     constructor() {
         this.input = '0';
+        this.result = 0;
         this.output = '';
         this.prevOperand = '';
     }
@@ -22,7 +23,6 @@ class Calculator {
     }
 
     operandHandler = operand => {
-        let result
         //if we just had equals we reset
         if (this.prevOperand === '=') {
             return this.reset();
@@ -30,34 +30,36 @@ class Calculator {
         //first input, so no calculations needed
         else if (this.output === '') {
             this.output = this.input + operand;
+            this.result = parseFloat(this.input)
             this.input = '0';
         }
         //input is '0' means that there is already an operand chosen
         else if (this.input === '0') return;
         //if we want eqauls we want to display that in input 
-        else if (operand === '=') {
-            result = parseFloat(this.output) / parseFloat(this.input);
-            this.input = result.toString();
-        }
         else {
-            switch(operand) {
+            switch(this.prevOperand) {
                 case '/':
-                    result = parseFloat(this.output) / parseFloat(this.input);
+                    this.result /= parseFloat(this.input);
                     break;
                 case '*':
-                    result = parseFloat(this.output) * parseFloat(this.input);
+                    this.result *= parseFloat(this.input);
                     break;
                 case '+':
-                    result = parseFloat(this.output) + parseFloat(this.input);
+                    this.result += parseFloat(this.input);
                     break;
                 case '-':
-                    result = parseFloat(this.output) - parseFloat(this.input);
+                    this.result -= parseFloat(this.input);
                     break;
                 default: 
-                    return result = 0;
+                    return this.result = 0;
             };
-            this.output = result.toString() + operand;
-            this.input = '0';
+            if (operand === '=') {
+                this.input = '=  ' + this.result.toString();
+                this.output = '';
+            } else {
+                this.output = this.result.toString() + operand;
+                this.input = '0';
+            }
         }
         this.prevOperand = operand;
         this.updateScreen();
@@ -75,6 +77,7 @@ class Calculator {
     };
 
     reset = () => {
+        this.result = 0;
         this.input = '0';
         this.output = '';
         this.prevOperand = '';
